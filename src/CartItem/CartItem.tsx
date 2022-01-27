@@ -3,13 +3,19 @@ import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 
 import { cartItemType } from "../App";
 import { Wrapper } from "./CartItem.styles";
+import { bindActionCreators } from "redux";
+import { useDispatch } from "react-redux";
+import { cartAction } from "../redux";
 
 type Props = {
   item: cartItemType;
-  addToCart: (clickedItem: cartItemType) => void;
-  removeFromCart: (id: number) => void;
 };
-const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => {
+const CartItem: React.FC<Props> = ({ item }) => {
+  const dispatch = useDispatch();
+  const { addToCart, removeFromCart } = bindActionCreators(
+    cartAction,
+    dispatch
+  );
   return (
     <Wrapper>
       <div>

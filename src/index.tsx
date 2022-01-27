@@ -5,12 +5,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 const client = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>
-    <QueryClientProvider client={client}>
-      <App />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={client}>
+        <App />
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

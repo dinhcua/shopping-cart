@@ -1,14 +1,18 @@
 import { Button } from "antd";
-
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 import { cartItemType } from "../App";
 
 import { Wapper } from "../App.styles";
+import { cartAction } from "../redux";
 
 type Props = {
   item: cartItemType;
-  handleAddToCart: (clickedItem: cartItemType) => void;
 };
-const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
+const Item: React.FC<Props> = ({ item }) => {
+  const dispatch = useDispatch();
+  const { addToCart } = bindActionCreators(cartAction, dispatch);
+
   return (
     <Wapper>
       <img src={item.image} alt={item.title} />
@@ -17,7 +21,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart }) => {
         <p>{item.description}</p>
         <h3>${item.price}</h3>
       </div>
-      <Button onClick={() => handleAddToCart(item)}>Add to cart </Button>
+      <Button onClick={() => addToCart(item)}>Add to cart </Button>
     </Wapper>
   );
 };
