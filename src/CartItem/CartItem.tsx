@@ -6,16 +6,17 @@ import { Wrapper } from "./CartItem.styles";
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import { cartAction } from "../redux";
+import { addToCart, removeFromCart } from "../redux/toolkit/cartSlice";
 
 type Props = {
   item: cartItemType;
 };
 const CartItem: React.FC<Props> = ({ item }) => {
   const dispatch = useDispatch();
-  const { addToCart, removeFromCart } = bindActionCreators(
-    cartAction,
-    dispatch
-  );
+  // const { addToCart, removeFromCart } = bindActionCreators(
+  //   cartAction,
+  //   dispatch
+  // );
   return (
     <Wrapper>
       <div>
@@ -28,13 +29,13 @@ const CartItem: React.FC<Props> = ({ item }) => {
           <Button
             size="small"
             icon={<MinusOutlined />}
-            onClick={() => removeFromCart(item.id)}
+            onClick={() => dispatch(removeFromCart(item.id))}
           />
           <p>{item.amount}</p>
           <Button
             size="small"
             icon={<PlusOutlined />}
-            onClick={() => addToCart(item)}
+            onClick={() => dispatch(addToCart(item))}
           />
         </div>
       </div>

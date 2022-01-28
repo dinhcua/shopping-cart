@@ -5,13 +5,14 @@ import { cartItemType } from "../App";
 
 import { Wapper } from "../App.styles";
 import { cartAction } from "../redux";
+import { addToCart } from "../redux/toolkit/cartSlice";
 
 type Props = {
   item: cartItemType;
 };
 const Item: React.FC<Props> = ({ item }) => {
   const dispatch = useDispatch();
-  const { addToCart } = bindActionCreators(cartAction, dispatch);
+  // const { addToCart } = bindActionCreators(cartAction, dispatch);
 
   return (
     <Wapper>
@@ -21,7 +22,7 @@ const Item: React.FC<Props> = ({ item }) => {
         <p>{item.description}</p>
         <h3>${item.price}</h3>
       </div>
-      <Button onClick={() => addToCart(item)}>Add to cart </Button>
+      <Button onClick={() => dispatch(addToCart(item))}>Add to cart </Button>
     </Wapper>
   );
 };
